@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import requests
 import json
@@ -54,4 +54,4 @@ for forecast in tides['predictions']:
   event['location'] = 'Greenwich Point Park\n58 Tods Driftway, Old Greenwich, CT  06870, United States'
   cal.add_component(event)
   
-print cal.to_ical()
+print(cal.to_ical())

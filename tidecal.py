@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import requests
 import json
@@ -51,7 +51,10 @@ for forecast in tides['predictions']:
   event['dtstart'] = d
   event['summary'] = longt
   event['dtend'] = d
-  event['location'] = 'Greenwich Point Park\n58 Tods Driftway, Old Greenwich, CT  06870, United States'
+  event['location'] = """Greenwich Point Park
+58 Tods Driftway
+Old Greenwich, CT  06870
+United States"""
   cal.add_component(event)
-  
-print(cal.to_ical())
+
+print(cal.to_ical().decode('utf-8'))

@@ -1,8 +1,12 @@
+#!/usr/bin/python3
+
 from pathlib import Path
 import subprocess
 import requests
 
-file = "/Users/mpuskar/.wan_ip"
+home = str(Path.home())
+
+file = home + "/.wan_ip"
 
 r = requests.get("https://ipecho.net/plain")
 

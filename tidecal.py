@@ -24,9 +24,15 @@ begindate = datetime.date.today().strftime('%Y%m%d')
 enddate = datetime.date.today() +  datetime.timedelta(days=90)
 enddate = enddate.strftime('%Y%m%d')
 
+
+
+#set header token:cvuMpmiyEMeEdgQyUKUsWhCemxSyssAO
+
+
 #8469198 - Stamford Harbor, CT
 #8517394 - Barren Island, Rockaway Inlet
 #8532337 - Belmar, NJ
+#8515186 - Fire Island
 
 payload = {'product': 'predictions', 'application': 'NOS.COOPS.TAC.WL', 'begin_date': begindate, 'end_date': enddate, 'datum': 'MLLW', 'station': '8469198', 'time_zone': 'GMT', 'units': 'english', 'interval': 'hilo', 'format': 'json'}
 

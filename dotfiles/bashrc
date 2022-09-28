@@ -1,0 +1,5 @@
+unalias loony
+#unset PROMPT_COMMAND
+if [[ "$TERM" == "screen" ]]; then
+    unset PROMPT_COMMAND
+fi

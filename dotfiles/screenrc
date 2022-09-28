@@ -1,5 +1,0 @@
-autodetach on
-startup_message off
-hardstatus alwayslastline
-hardstatus string "%{= Y}%H    %{= C}%w"
-defdynamictitle off

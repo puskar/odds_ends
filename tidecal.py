@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/opt/anaconda3/bin/python3
 
 import requests
 import json
@@ -20,6 +20,13 @@ from icalendar import Calendar, Event
 
 #cal['dtstart'] = '20050404T080000'
 
+#8469198 - Stamford Harbor, CT
+#8517394 - Barren Island, Rockaway Inlet
+#8532337 - Belmar, NJ
+#8515186 - Fire Island
+
+station=8515186
+
 begindate = datetime.date.today().strftime('%Y%m%d')
 enddate = datetime.date.today() +  datetime.timedelta(days=90)
 enddate = enddate.strftime('%Y%m%d')
@@ -29,17 +36,21 @@ enddate = enddate.strftime('%Y%m%d')
 #set header token:cvuMpmiyEMeEdgQyUKUsWhCemxSyssAO
 
 
-#8469198 - Stamford Harbor, CT
-#8517394 - Barren Island, Rockaway Inlet
-#8532337 - Belmar, NJ
-#8515186 - Fire Island
+# get name/location info
 
-payload = {'product': 'predictions', 'application': 'NOS.COOPS.TAC.WL', 'begin_date': begindate, 'end_date': enddate, 'datum': 'MLLW', 'station': '8469198', 'time_zone': 'GMT', 'units': 'english', 'interval': 'hilo', 'format': 'json'}
+loc = requests.get(f"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/{station}.json")
+
+locname = loc.json()['stations'][0]["name"]
+locstate = loc.json()['stations'][0]["state"]
+
+
+
+payload = {'product': 'predictions', 'application': 'NOS.COOPS.TAC.WL', 'begin_date': begindate, 'end_date': enddate, 'datum': 'MLLW', 'station': station, 'time_zone': 'GMT', 'units': 'english', 'interval': 'hilo', 'format': 'json'}
 
 r = requests.get('https://tidesandcurrents.noaa.gov/api/datagetter', params=payload)
 
 tides = r.json()
-
+#print(tides)
 cal = Calendar()
 #cal.add('prodid', '-//my tide script')
 #cal.add('version', '0.99')
@@ -57,10 +68,7 @@ for forecast in tides['predictions']:
   event['dtstart'] = d
   event['summary'] = longt
   event['dtend'] = d
-  event['location'] = """Greenwich Point Park
-58 Tods Driftway
-Old Greenwich, CT  06870
-United States"""
+  event['location'] = f"{locname}, {locstate}"
   cal.add_component(event)
 
 print(cal.to_ical().decode('utf-8'))

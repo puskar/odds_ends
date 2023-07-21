@@ -6,6 +6,7 @@ import pprint
 import time
 import datetime
 from icalendar import Calendar, Event
+import argparse
 
 
 # {
@@ -25,7 +26,24 @@ from icalendar import Calendar, Event
 #8532337 - Belmar, NJ
 #8515186 - Fire Island
 
-station=8515186
+parser = argparse.ArgumentParser(prog='tidecal',
+                                 description='Take a NOAA station and out put tide info in iCal format',
+                                 formatter_class=argparse.RawDescriptionHelpFormatter,
+                                 epilog='''Some stations are
+
+8469198 - Stamford Harbor, CT
+8517394 - Barren Island, Rockaway Inlet
+8532337 - Belmar, NJ
+8515186 - Fire Island
+
+Find more stations at https://tidesandcurrents.noaa.gov/'''
+                                 )
+
+parser.add_argument('station',nargs='?',default='8469198', help='The station id to get tide data for. Default is Stamford Harbor')
+
+args=parser.parse_args()
+
+station=args.station
 
 begindate = datetime.date.today().strftime('%Y%m%d')
 enddate = datetime.date.today() +  datetime.timedelta(days=90)

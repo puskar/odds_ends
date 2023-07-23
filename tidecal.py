@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import requests
 import json
 import pprint
@@ -45,7 +47,7 @@ Find more stations at https://tidesandcurrents.noaa.gov/'''
 def station_id():
     return render_template('station.html')
 
-parser.add_argument('station',nargs='?',default='8469198', help='The station id to get tide data for. Default is Stamford Harbor')
+parser.add_argument('station',nargs='?',default='8469198', help='The station id to get tide data for.')
 
 args=parser.parse_args()
 

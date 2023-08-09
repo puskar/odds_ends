@@ -55,7 +55,8 @@ station=args.station
 
 @flask_app.route("/tidecal/<station>", methods=['GET'])
 def get_tide_ics(station):
-  begindate = datetime.date.today().strftime('%Y%m%d')
+  begindate = datetime.date.today() - datetime.timedelta(days=7)
+  begindate = begindate.strftime('%Y%m%d')
   enddate = datetime.date.today() +  datetime.timedelta(days=90)
   enddate = enddate.strftime('%Y%m%d')
   

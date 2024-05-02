@@ -1,6 +1,5 @@
 import requests
 from icalendar import Calendar, Event
-import re
 from flask import Flask, make_response, render_template
 
 

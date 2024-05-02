@@ -10,20 +10,29 @@ flask_app = Flask("ghsathletics")
 url = "https://www2.arbitersports.com/ICal/School/schedule.ics?id=cHHWgTXR%2b%2fvlYfnDlphDuQ%3d%3d"
 
 
-@flask_app.route("/ghscal/<part1>/<part2>/<part3>", methods=['GET'])
+@flask_app.route("/ghscal/", methods=['GET'], defaults={'part1': '', 'part2': '', 'part3': ''})
+@flask_app.route("/ghscal/<string:part1>", methods=['GET'], defaults={'part2': '', 'part3': ''})
+@flask_app.route("/ghscal/<string:part1>/<string:part2>", methods=['GET'], defaults= {'part3': ''})
+@flask_app.route("/ghscal/<string:part1>/<string:part2>/<string:part3>", methods=['GET'])
+
 
 def getcal(part1, part2, part3):
     cal = Calendar.from_ical(requests.get(url).text)
 
     #print(cal.to_ical().decode("utf-8").replace('\r\n', '\n').strip())
 
+    match = [part1, part2, part3]
+    match = [element.lower() for element in match]
+
     newcal = Calendar()
 
     for component in cal.walk(name="VEVENT"):
-        if re.search('.*' + part1 + '*', component.get("description"), flags=re.I) and re.search('.*' + part2 + '*', component.get("description"), flags=re.I) and re.search('.*' + part3 + '*', component.get("description"), flags=re.I):
+        desc = component.get("description").replace("\n", " ").lower().split()
+        
+        print(f'match={match} desc={desc}')
+        if all(any(sub in string for string in desc) for sub in match):
             component.get("description")
             newcal.add_component(component)
-            #print(component.to_ical().decode("utf-8").replace('\r\n', '\n').strip())
             
     newcal.add('X-WR-CALNAME', f'{part1} {part2} {part3}')
   

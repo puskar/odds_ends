@@ -34,12 +34,12 @@ def getcal(part1, part2, part3):
             component.get("description")
             newcal.add_component(component)
             
-    newcal.add('X-WR-CALNAME', f'{part1} {part2} {part3}')
+    newcal.add('X-WR-CALNAME', f'{part1.title()} {part2.title()} {part3.title()}')
   
 
     response = make_response(newcal.to_ical().decode("utf-8").replace('\r\n', '\n').strip())
     response.headers['Content-Type'] = 'text/calendar'
-    response.headers['Content-Disposition'] = f'inline; filename="{part1}{part2}{part3}.ics"'
+    response.headers['Content-Disposition'] = f'inline; filename="{part1.title()}{part2.title()}{part3.title()}.ics"'
     return(response)
 
 #getcal("boys", "freshmen", "lacrosse")

@@ -29,7 +29,7 @@ def getcal(part1, part2, part3):
     for component in cal.walk(name="VEVENT"):
         desc = component.get("description").replace("\n", " ").lower().split()
         
-        print(f'match={match} desc={desc}')
+        #print(f'match={match} desc={desc}')
         if all(any(sub in string for string in desc) for sub in match):
             component.get("description")
             newcal.add_component(component)

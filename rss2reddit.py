@@ -19,14 +19,13 @@ d = feedparser.parse(rss_url)
 
 earlier = datetime.timetuple(datetime.utcnow() - timedelta(hours=12))
 
-
-reddit = praw.Reddit(
-    client_id="2gFwB4Avy_46lgb2HZDrVQ",
-    client_secret="__OCFHd7EzWG128W2VjtAz3RNa4apA",
-    password="xodpu1-qosguD-jimzyb",
-    user_agent="rss reposter",
-    username="greenwitchbot",
-)
+#reddit = praw.Reddit(
+#    client_id="XXXXXXX"
+#    client_secret="XXXXXXX",
+#    password="XXXXXXX",
+#    user_agent="rss reposter",
+#    username="XXXX",
+#)
 
 tmpart = reddit.redditor('greenwitchbot').submissions.new(limit=1)
 

@@ -1,9 +1,12 @@
 import feedparser
 import praw
-import pprint
 from datetime import datetime
 from datetime import timedelta
 import time
+import logging
+
+
+logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
 
 # Greenwich Free Press
 rss_url='https://greenwichfreepress.com/feed/'
@@ -35,6 +38,7 @@ except:
     latest_r_post=time.gmtime(0)
 
 f_title = d.feed.title
+logging.info("Begin rss2reddit run")
 for entry in reversed(range(len(d.entries))):
     if  d.entries[entry].published_parsed > latest_r_post:
         a_pubdate = d.entries[entry].published
@@ -44,5 +48,8 @@ for entry in reversed(range(len(d.entries))):
         a_author=d.entries[entry].author
 
         a_post = f'[{f_title}]({a_link})\n\n{a_entry}\n\n{a_pubdate}'
-        print(f"{entry}. {a_post}")
-        reddit.subreddit("test").submit(a_title, selftext=a_post)
+        #print(f"{entry}. {a_post}")
+        logging.info(f"Posted: {a_title}")
+        #reddit.subreddit("test").submit(a_title, selftext=a_post)
+logging.info("End rss2reddit run")
+

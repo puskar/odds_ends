@@ -50,6 +50,6 @@ for entry in reversed(range(len(d.entries))):
         a_post = f'[{f_title}]({a_link})\n\n{a_entry}\n\n{a_pubdate}'
         #print(f"{entry}. {a_post}")
         logging.info(f"Posted: {a_title}")
-        #reddit.subreddit("test").submit(a_title, selftext=a_post)
+        reddit.subreddit("Greenwich").submit(a_title, selftext=a_post)
 logging.info("End rss2reddit run")
 

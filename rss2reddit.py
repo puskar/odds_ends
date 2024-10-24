@@ -17,20 +17,14 @@ feedparser.sanitizer._HTMLSanitizer.acceptable_elements = []
 
 d = feedparser.parse(rss_url)
 
-#reddit = praw.Reddit(
-#    client_id="XXXXXXX",
-#    client_secret="XXXXXXX",
-#    password="XXXXXXX",
-#    user_agent="rss reposter",
-#    username="XXXX",
-#)
 reddit = praw.Reddit(
-    client_id="2gFwB4Avy_46lgb2HZDrVQ",
-    client_secret="__OCFHd7EzWG128W2VjtAz3RNa4apA",
-    password="xodpu1-qosguD-jimzyb",
+    client_id="XXXXXXX",
+    client_secret="XXXXXXX",
+    password="XXXXXXX",
     user_agent="rss reposter",
-    username="greenwitchbot",
+    username="XXXX",
 )
+
 # set up variables
 
 # all the articles from the RSS feed
@@ -81,4 +75,3 @@ for a in posts:
     #reddit.subreddit("greenwich").submit({a["title"]}, selftext={a["selftext"]})
 
 logging.info("End rss2reddit run")
-

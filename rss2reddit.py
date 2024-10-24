@@ -2,9 +2,7 @@ import feedparser
 import praw
 from datetime import datetime
 from datetime import timedelta
-import time
 import logging
-
 
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
 
@@ -19,37 +17,68 @@ feedparser.sanitizer._HTMLSanitizer.acceptable_elements = []
 
 d = feedparser.parse(rss_url)
 
-
-earlier = datetime.timetuple(datetime.utcnow() - timedelta(hours=12))
-
 #reddit = praw.Reddit(
-#    client_id="XXXXXXX"
+#    client_id="XXXXXXX",
 #    client_secret="XXXXXXX",
 #    password="XXXXXXX",
 #    user_agent="rss reposter",
 #    username="XXXX",
 #)
+reddit = praw.Reddit(
+    client_id="2gFwB4Avy_46lgb2HZDrVQ",
+    client_secret="__OCFHd7EzWG128W2VjtAz3RNa4apA",
+    password="xodpu1-qosguD-jimzyb",
+    user_agent="rss reposter",
+    username="greenwitchbot",
+)
+# set up variables
 
-tmpart = reddit.redditor('greenwitchbot').submissions.new(limit=1)
+# all the articles from the RSS feed
+article_list = []
 
-try:
-    latest_r_post=time.gmtime(tmpart.__iter__().__next__().created_utc)
-except:
-    latest_r_post=time.gmtime(0)
+# the titles of the articles from the RSS feed
+rss_title_list = []
+
+# the titles of the articles posted to Reddit
+reddit_title_list = []
+
+#the articles to post to Reddit
+posts = []
+
+# Get 20 most recent articles posted to Reddit
+tmpart = reddit.redditor('greenwitchbot').submissions.new(limit=20)
+
+# Put just the titles in a list
+for submission in tmpart:
+    reddit_title_list.append(submission.title)
 
 f_title = d.feed.title
-logging.info("Begin rss2reddit run")
-for entry in reversed(range(len(d.entries))):
-    if  d.entries[entry].published_parsed > latest_r_post:
-        a_pubdate = d.entries[entry].published
-        a_title=d.entries[entry].title
-        a_entry=d.entries[entry].summary
-        a_link=d.entries[entry].link
-        a_author=d.entries[entry].author
 
-        a_post = f'[{f_title}]({a_link})\n\n{a_entry}\n\n{a_pubdate}'
-        #print(f"{entry}. {a_post}")
-        logging.info(f"Posted: {a_title}")
-        reddit.subreddit("Greenwich").submit(a_title, selftext=a_post)
+# put all the articles from the RSS feed into a list of dicts
+
+for entry in reversed(range(len(d.entries))):
+    article = {}
+    rss_title_list.append(d.entries[entry].title)
+    article["title"] = d.entries[entry].title
+    article["selftext"] = f'[{f_title}]({d.entries[entry].link})\n\n{d.entries[entry].summary}\n'
+    article_list.append(article)
+
+# get the list of article titles to post bye getting the titles only in the RSS feed
+
+to_post = list(set(rss_title_list).difference(reddit_title_list))
+
+# remove all the articles that have already been posted
+for post_article in article_list:
+    if post_article["title"] in to_post:
+        posts.append(post_article)
+
+
+logging.info("Begin rss2reddit run")
+
+# post the articles to Reddit
+for a in posts:
+    print(f'Posting {posts.index(a) + 1}/{len(posts)} {a["title"]}, {a["selftext"]})')
+    #reddit.subreddit("greenwich").submit({a["title"]}, selftext={a["selftext"]})
+
 logging.info("End rss2reddit run")
 

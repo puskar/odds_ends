@@ -3,6 +3,7 @@ import praw
 from datetime import datetime
 from datetime import timedelta
 import logging
+import unicodedata
 
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
 
@@ -39,15 +40,15 @@ reddit_title_list = []
 #the articles to post to Reddit
 posts = []
 
-def nbsp_sp(string):
-    return string.replace("\xa0", " ") 
+def utf_norm(string):
+    return unicodedata.normalize('NFKC', string) 
 
 # Get 20 most recent articles posted to Reddit
 tmpart = reddit.redditor('greenwitchbot').submissions.new(limit=20)
 
 # Put just the titles in a list
 for submission in tmpart:
-    reddit_title_list.append(nbsp_sp(submission.title))
+    reddit_title_list.append(utf_norm(submission.title))
 
 f_title = d.feed.title
 
@@ -55,8 +56,8 @@ f_title = d.feed.title
 
 for entry in reversed(range(len(d.entries))):
     article = {}
-    rss_title_list.append(nbsp_sp(d.entries[entry].title))
-    article["title"] = nbsp_sp(d.entries[entry].title)
+    rss_title_list.append(utf_norm(d.entries[entry].title))
+    article["title"] = utf_norm(d.entries[entry].title)
     article["selftext"] = f'[{f_title}]({d.entries[entry].link})\n\n{d.entries[entry].summary}\n'
     article_list.append(article)
 

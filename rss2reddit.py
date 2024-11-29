@@ -39,12 +39,15 @@ reddit_title_list = []
 #the articles to post to Reddit
 posts = []
 
+def nbsp_sp(string):
+    return string.replace("\xa0", " ") 
+
 # Get 20 most recent articles posted to Reddit
 tmpart = reddit.redditor('greenwitchbot').submissions.new(limit=20)
 
 # Put just the titles in a list
 for submission in tmpart:
-    reddit_title_list.append(submission.title)
+    reddit_title_list.append(nbsp_sp(submission.title))
 
 f_title = d.feed.title
 
@@ -52,8 +55,8 @@ f_title = d.feed.title
 
 for entry in reversed(range(len(d.entries))):
     article = {}
-    rss_title_list.append(d.entries[entry].title)
-    article["title"] = d.entries[entry].title
+    rss_title_list.append(nbsp_sp(d.entries[entry].title))
+    article["title"] = nbsp_sp(d.entries[entry].title)
     article["selftext"] = f'[{f_title}]({d.entries[entry].link})\n\n{d.entries[entry].summary}\n'
     article_list.append(article)
 

@@ -4,6 +4,7 @@ from datetime import datetime
 from datetime import timedelta
 import logging
 import unicodedata
+import re
 
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
 
@@ -41,7 +42,9 @@ reddit_title_list = []
 posts = []
 
 def utf_norm(string):
-    return unicodedata.normalize('NFKC', string) 
+    unicodedata.normalize('NFKC', string)
+    s= re.sub(r"\s+", " ", string)
+    return s
 
 # Get 20 most recent articles posted to Reddit
 tmpart = reddit.redditor('greenwitchbot').submissions.new(limit=20)

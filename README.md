@@ -14,3 +14,9 @@ Looking at the root **http://hostname/ghscal/** will return all events.
 There are a maximum of three arguments/path elements allowed. 
 
 **[rss2reddit.py](rss2reddit.py)** - take an RSS feed and post the articles to a subreddit
+
+**[api.puskar.net.conf](api.puskar.net.conf)** - nginx config to serve vhost from router. Add this file to `/etc/nginx/conf.d` and this include to `/etc/nginx/nginx.conf`:
+```
+    # MCHP local includes
+    include /etc/nginx/conf.d/*.conf;
+```

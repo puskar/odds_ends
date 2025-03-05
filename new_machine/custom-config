@@ -1,0 +1,71 @@
+sudo apt install apache2
+
+add the following to /etc/apache2/apache.conf 
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+ServerName api.puskar.net
+ProxyPreserveHost On
+ProxyRequests Off
+ProxyPass /tidecal http://localhost:8080/tidecal
+ProxyPassReverse /tidecal http://localhost:8080/tidecal
+ProxyPass /ghscal http://localhost:8081/ghscal
+ProxyPassReverse /ghscal http://localhost:8081/ghscal
+RemoteIPHeader X-Forwarded-For
+RemoteIPInternalProxy 192.168.0.0/16
+ProxyAddHeaders On
+
+<Directory /home/puskar/cellsounds>
+        Options Indexes FollowSymLinks
+</Directory>
+
+<IfModule log_forensic_module>
+ForensicLog ${APACHE_LOG_DIR}/forensic.log
+</IfModule>
+
+As root from /etc/apache2/mods-enabled run:
+
+for i in proxy.conf proxy_http.load proxy.load remoteip.load ; do ln -s ../mods-available/$i $i ; done
+
+
+Now to install certbot:
+
+sudo apt update
+sudo apt install snapd
+
+sudo reboot
+
+sudo snap install core
+
+sudo snap install --classic certbot
+
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+On the old machine:
+
+sudo tar zcf /tmp/letsencrypt.tgz /etc/letsencrypt
+
+scp  /tmp/letsencrypt.tgz newmachine:
+
+On the new machine:
+
+sudo tar xf letencrypt.tgz
+
+Check the permissions and all that. To check run:
+
+sudo certbot show_account
+
+sudo certbot certificates
+
+Both those should return normal output.
+
+From your homedir on the old machine run:
+
+scp -r cellsounds  odds_ends rss2reddit.py teamcal tidecal newachine:
+
+Copy over the systemd service files:
+
+scp /etc/systemd/system/teamcal.service /etc/systemd/system/tidecal.service newmachine:
+
+sudo chown root:root /etc/systemd/system/t*cal.service
+
+sudo systemctl daemon-reload

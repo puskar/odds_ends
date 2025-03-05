@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/mpuskar/workspace/dns_zonefiles/datacenter_pdx'
+let g:netrw_dirhist_6='/Users/mpuskar/workspace/dns_zonefiles/datacenter_smf'
+let g:netrw_dirhist_5='/Users/mpuskar/workspace/source/t3/src/main/scala/com/twitter/t3/internal'
+let g:netrw_dirhist_4='/Users/mpuskar/Library/Application Support/Steam/steamapps'
+let g:netrw_dirhist_3='/Users/mpuskar/workspace/tsa/config/dxb2'
+let g:netrw_dirhist_2='/Users/mpuskar/workspace/puppet-twitter/site/tfe/manifests/router'
+let g:netrw_dirhist_1='/Users/mpuskar/workspace/source/tfe/src/scripts'

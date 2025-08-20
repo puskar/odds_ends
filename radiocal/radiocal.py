@@ -12,9 +12,6 @@ r = requests.get("https://wobc.pairsite.com/")
 
 url = re.search('http.*B=Schedule', r.text).group()
 
-print(url)
-
-#url = "https://wobc.pairsite.com/?O=&I=&InfoID=3&P=17&B=Schedule"
 #file_url = "file:////Users/puskar/workspace/github/odds_ends/radiocal/radio.html"
 
 # Cache the DataFrame at startup

@@ -29,7 +29,7 @@ def radiocal(show):
     tz= ZoneInfo("America/New_York")
 
     cal = Calendar()
-    cal.add('X-WR-CALNAME', f'"WOBC" {show} "calendar"')
+    cal.add('X-WR-CALNAME', f'WOBC {show} calendar')
     cal.add('prodid', '-//WOBC//WOBC Calendar//EN')
     cal.add('version', '2.0')
     cal.add('X-WR-TIMEZONE', 'America/New_York')

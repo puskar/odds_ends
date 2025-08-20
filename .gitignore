@@ -2,3 +2,4 @@
 .wan_ip
 uv.lock
 .python-version
+.*.swp

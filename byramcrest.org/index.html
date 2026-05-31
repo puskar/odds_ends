@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <title>Block Party – June 6</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="byramcrest.css">
+</head>
+
+<body>
+
+  <article class="flyer" aria-label="Block Party flyer">
+
+    <!-- ═══ ASSET: Neighborhood map background (extracted from PDF) ═══ -->
+    <img class="map-bg" src="https://byramcrest.org/bg.jpg" alt="Neighborhood survey map" aria-hidden="true"
+      data-entity="map-background">
+    <div class="map-overlay" aria-hidden="true"></div>
+
+    <div class="layer">
+
+      <!-- Text entity: date -->
+      <p class="text--date" data-entity="date">SATURDAY, JUNE 6</p>
+      <p class="text--date small" data-entity="date">Rain date: SUNDAY, JUNE 7</p>
+
+      <!-- Text entity: time -->
+      <p class="text--time" data-entity="time">1:00 pm - 6:00 pm</p>
+
+      <!-- Text entity: event title (arched SVG) -->
+      <svg class="arch-title" data-entity="event-title" viewBox="-50 -180 560 270" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="arc" d="M 30,130 A 200,200 0 0,1 430,130" />
+        </defs>
+        <text font-family="Anton, sans-serif" fill="#C8111A" font-size="100" letter-spacing="4" text-anchor="middle">
+          <textPath href="#arc" startOffset="50%">BLOCK PARTY!</textPath>
+        </text>
+      </svg>
+
+      <!-- Text entity: tagline -->
+      <p class="text--tagline" data-entity="tagline">
+        Food! Games!<br>Meet Your Neighbors!
+      </p>
+
+
+      <!-- Text entity: address -->
+      <address class="text--address">15-17 High St.</address>
+      <div class="spacer"></div>
+      <div class="text--address">Got questions?</div>
+      <div class="text--address">Check out the <a href="https://byramcrest.org/faq.html">FAQ</a></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <!-- Footer text entities + QR asset -->
+      <div class="footer">
+        <p class="text--footer-label" data-entity="cta">For more info or to volunteer:</p>
+        <div class="footer-bottom">
+          <div class="text--contact" data-entity="contact-details">
+            <a href="https://byramcrest.org/faq.html">Check the FAQ</a><br>
+            <a href="https://byramcrest.org/">https://byramcrest.org/</a><br>
+            <a href="mailto:info@byramcrest.org">info@byramcrest.org</a><br>
+            <a href="tel:203-716-1514">(203) 716-1514</a>
+          </div>
+          <!-- ═══ ASSET: QR code ═══ -->
+          <img class="qr-wrap" src="https://byramcrest.org/qr.png" alt="QR code for byramcrest.org">
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+</body>
+
+</html>

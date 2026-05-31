@@ -1,0 +1,240 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #aaa;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+body.faq-page {
+  background: #F2EDE2 url('https://byramcrest.org/bg.jpg') center/cover no-repeat fixed;
+}
+
+@supports (-webkit-touch-callout: none) {
+  body.faq-page {
+    background-attachment: scroll;
+  }
+}
+
+body.faq-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(242, 237, 226, 0.85);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ═══ FLYER (index.html) ═══ */
+
+.flyer {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  background: #F2EDE2;
+  padding-bottom: 80%; /* 3:4 ratio */
+  overflow: hidden;
+}
+
+/* ═══ ASSET: Map background ═══ */
+.map-bg {
+  position: absolute;
+  inset: 0;
+  width: -webkit-fill-available;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Semi-transparent cream overlay to lighten the map like the original */
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(242, 237, 226, 0.85);
+}
+
+/* ── All text sits above map ── */
+.layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.5% 4% 2%;
+}
+
+/* ═══ TEXT ENTITIES ═══ */
+
+.text--date {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(1.75rem, 9.8vw, 3.3rem);
+  color: #C8111A;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.0;
+  text-align: center;
+  margin-top: 0;
+}
+
+.small {
+  font-size: 1.3rem;
+  letter-spacing: 0.01em;
+  line-height: 1.0;
+  margin-top: 1.0rem;
+  margin-bottom: 1.0rem;
+}
+
+.text--time {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(1.7rem, 8.2vw, 3.2rem);
+  color: #C8111A;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  text-align: center;
+  margin-top: 0.1em;
+}
+
+/* BLOCK PARTY! — arched using SVG text on path */
+.arch-title {
+  width: 92%;
+  max-width: 560px;
+  margin: 0.5% 0 0.5%;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.text--tagline {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(0.9rem, 3.3vw, 1.35rem);
+  color: #111;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  text-align: center;
+  margin-top: 0.5%;
+}
+
+.text--address {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(1.8rem, 8vw, 3.2rem);
+  color: #C8111A;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  text-align: center;
+  margin-top: 1.5%;
+  font-style: normal;
+}
+
+.text--address a {
+  color: #111;
+  transition: color 0.2s ease;
+}
+
+.text--address a:hover {
+  color: #8a0b12;
+}
+
+.spacer { flex-grow: 0.1; }
+
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2%;
+  gap: 0.2em;
+}
+
+.text--footer-label {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(0.78rem, 2.7vw, 1.1rem);
+  color: #111;
+  letter-spacing: 0.02em;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  width: 100%;
+  margin-top: 0.3em;
+}
+
+.text--contact {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(0.75rem, 2.5vw, 1rem);
+  color: #111;
+  line-height: 1.65;
+  text-align: center;
+  letter-spacing: 0.015em;
+}
+.text--contact a { color: inherit; text-decoration: none; }
+
+
+/* ═══ FAQ STYLES (faq.html) ═══ */
+
+.faq-flyer {
+  position: relative;
+  width: 100%;
+  background: transparent;
+  min-height: 100vh;
+}
+
+.faq-layer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.5% 4% 2%;
+}
+
+.text-faq {
+  font-family: 'Barlow', sans-serif;
+  font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+  font-weight: 600;
+  line-height: 1.9;
+  width: 50%;
+  text-align: left;
+  letter-spacing: 0.05em;
+  margin-top: 0.5em;
+}
+
+.text-faq-q {
+  color: #C8111A;
+}
+
+.text-faq-a {
+  color: #111;
+  margin-bottom: 1.5em;
+}
+
+.text-faq-a a {
+  color: #111;
+  transition: color 0.2s ease;
+}
+
+.text-faq-a a:hover {
+  color: #8a0b12;
+}
+
+.faq-map {
+  display: block;
+  width: 75%;
+  max-width: 500px;
+  margin: 2.5em auto 0;
+}
+
+/* ═══ ASSET: QR Code ═══ */
+.qr-wrap {
+  width: clamp(52px, 11vw, 82px);
+  height: clamp(52px, 11vw, 82px);
+  flex-shrink: 0;
+  border: 2px solid #111;
+  background: white;
+  padding: 2px;
+}
+.qr-wrap svg { width: 100%; height: 100%; display: block; }
